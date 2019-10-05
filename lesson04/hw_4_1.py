@@ -12,17 +12,13 @@ def text_stat(t):
 
 
 b = int(input("введите дянные"))
-a = list()
 while True:
-    a.append(b)
+    text.append(b)
     try:
         b = int(input())
     except:
         break
-print(a)
-
-text.extend(a)
-print(a, text)
+print(text)
 text_stat(text)
 for i in sorted(d):
     print(i, d[i])

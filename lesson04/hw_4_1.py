@@ -1,24 +1,22 @@
-d = {}
 text = []
 
 
 def text_stat(t):
+    t = str(text)
+    print(t)
     print("количество символов списка = ", len(t))
-    for k in t:
-        if k in d:
-            d[k] += 1
+    for i in t:
+        if i == '.' or i == ';' or i == ']' or i == '[' or i == ' ' or i == '(' or i == ')' or i == '\'' or i == ',':
+            pass
         else:
-            d[k] = 1
+            print(i, t.count(i))
 
 
-b = int(input("введите дянные"))
+b = input("введите дянные: ")
 while True:
     text.append(b)
-    try:
-        b = int(input())
-    except:
+    b = input()
+    if not b:
         break
 print(text)
 text_stat(text)
-for i in sorted(d):
-    print(i, d[i])

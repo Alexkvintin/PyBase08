@@ -18,12 +18,13 @@ def rectangle(x, y):
 
 f = input("для начала работы програмы нажмите ENTER ")
 while f is not None:
-    a = input("""                     Площадь какой фигуры вы хотите вычеслить ?
+ try:
+     a = int(input("""                     Площадь какой фигуры вы хотите вычеслить ?
                                    Круг (1)
                                    Треугольник (2)
                                    Квадрат (3)
-                           Для выхода нажмите ENTER (4)""")
-    if a == "1" or a == "круг" or a == "circle":
+                           Для выхода нажмите ENTER"""))
+     if a == 1:
         b = float(input("Ввудите радиус круга:"))
         circle(b)
         k = int(input("для продолжения нажмите 1 для выхода 0: "))
@@ -31,7 +32,7 @@ while f is not None:
             continue
         elif k == 0:
             break
-    elif a == "2" or a == "теугольник" or a == "triangle":
+     elif a == 2:
         b = float(input("Введите размер первой стороны треугольника:"))
         c = float(input("Введите размер второй стороны треугольника:"))
         d = float(input("Введите размер третей стороны треугольника:"))
@@ -41,7 +42,7 @@ while f is not None:
             continue
         elif k == 0:
             break
-    elif a == "3" or a == "прямоугольник" or a == "rectangle":
+     elif a == 3:
         d = float(input("Введите длину прямоугольника:"))
         c = float(input("Введите ширину прямоугольника:"))
         rectangle(d, c)
@@ -50,9 +51,6 @@ while f is not None:
             continue
         elif k == 0:
             break
-    elif a == "" \
-              "" or a == "4":
-        a = 4
-        if a == 4:
-            break
+ except:
+    break
 print("работа программы завершена")

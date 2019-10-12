@@ -2,6 +2,7 @@ text = []
 d = {}
 v = {}
 
+
 def text_stat(t):
     l = 0
     w = 0
@@ -28,9 +29,9 @@ def text_stat(t):
                 or i == ',':
             pass
         else:
-            d[i] = g.count(i)
+            d[i.lower()] = g.count(i)
     for i in d:
-     print(i.lower(), d[i])
+     print(i, d[i])
     for i in text:
         l += 1
         b += len(i)
@@ -53,9 +54,9 @@ def text_stat(t):
                 or i == ',':
             pass
         else:
-            v[i] = t.count(i)
+            v[i.lower()] = t.count(i)
     for i in v:
-     print(i.lower(), v[i])
+     print(i, v[i])
 
 
 a = input("введите дянные: ")

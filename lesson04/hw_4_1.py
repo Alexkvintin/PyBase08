@@ -51,9 +51,9 @@ def text_stat(t):
                 or i == ',':
             pass
         else:
-            d[i] = t.count(i)
+            d[i.lower()] = t.count(i)
     for i in d:
-     print(i.lower(), d[i])
+     print(i, d[i])
 
 
 a = input("введите дянные: ")

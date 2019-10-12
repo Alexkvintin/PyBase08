@@ -55,7 +55,7 @@ def text_stat(t):
         else:
             v[i] = t.count(i)
     for i in v:
-     print(i, v[i])
+     print(i.lower(), v[i])
 
 
 a = input("введите дянные: ")

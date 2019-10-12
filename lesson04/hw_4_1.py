@@ -1,5 +1,13 @@
 text = []
 d = {}
+v = {}
+
+
+def filt(x, y):
+    if  x != y:
+        return 1
+    else:
+        return 0
 
 
 def text_stat(t):
@@ -13,23 +21,23 @@ def text_stat(t):
         n = len(g)
         for i in range(n):
             h = g[i].split(str(gi))
-            while True :
-                try :
+            while True:
+                try:
                     h.remove('')
                 except ValueError:
                     break
             Temp = Temp + h
             if i == n - 1 :
                 g = Temp[:]
-    print(g)
-    while True:
-        try:
-            print(g.pop())
-        except:
-            break
+    print("Статистика слов:")
     for i in g:
-       x = g.pop()
-       print(x)
+        if i == '@' or i == '.' or i == ';' or i == ']' or i == '[' or i == ' ' or i == '(' or i == ')' or i == '\'' \
+                or i == ',':
+            pass
+        else:
+            d[i.lower()] = g.count(i)
+    for i in d:
+     print(i, d[i])
     for i in text:
         l += 1
         b += len(i)
@@ -44,16 +52,16 @@ def text_stat(t):
     print("количество строк в тексте: ", l)
     print("Количестро слов в тексте: ", w)
     print("количество символов в тексте: ", b)
-
     t = str(text)
+    print("Статистика символов:")
     for i in t:
         if i == '@' or i == '.' or i == ';' or i == ']' or i == '[' or i == ' ' or i == '(' or i == ')' or i == '\'' \
                 or i == ',':
             pass
         else:
-            d[i.lower()] = t.count(i)
-    for i in d:
-     print(i, d[i])
+            v[i.lower()] = t.count(i)
+    for i in v:
+     print(i, v[i])
 
 
 a = input("введите дянные: ")
@@ -62,7 +70,4 @@ while True:
     a = input()
     if not a:
         break
-
-p = ['.', ',', ':', ';', '!', '?', '(', ')', '[', ']', '&', '*']
-print(text)
 text_stat(text)

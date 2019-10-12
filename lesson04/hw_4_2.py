@@ -30,7 +30,7 @@ def text_stat(t):
         else:
             d[i] = g.count(i)
     for i in d:
-     print(i, d[i])
+     print(i.lower(), d[i])
     for i in text:
         l += 1
         b += len(i)

@@ -1,145 +1,89 @@
-class Person :
-    n = 0
-    name = None
-    surname = None
+class Person:
+    def __init__(self, name, surname, patronymic, mail, phone, address):
+        self.name = name
+        self.surname = surname
+        self.patronymic = patronymic
+        self.mail = mail
+        self.phone = phone
+        self.address = address
+
+    def __str__(self):
+        return f'имя {self.name}, фамилия {self.surname}, отчество {self.patronymic}, почта {self.mail},' \
+               f' номер телефона {self.phone}, адрес {self.address}.'
+
+    def __repr__(self):
+        return f'Car({repr(self.name)}, {repr(self.surname)}, {repr(self.patronymic)}, {self.mail}, ' \
+               f'{self.phone}, {self.address})'
 
 
-def _save(x):
-    h = open('b.txt', 'a')
-    for i in x[:] :
-        h.write(repr(x.pop()))
-        h.write('\n')
-    h.close()
+class List:
+
+    def __init__(self, catalog, numbers=0):
+        self.catalog = catalog
+        self.numbers = numbers
+
+    def __str__(self):
+        result = [f"Количество контактов = {self.numbers}"]
+        for i, pers in enumerate(self.catalog, start=1) :
+         self.numbers += 1
+         result.append(f"{i}. {str(pers)}")
+        return '\n'.join(result)
+
+    def __repr__(self):
+        result = [f"Количество контактов = {self.numbers}"]
+        for pers in self.catalog:
+            result.append(repr(pers))
+        return f"{self.__class__.__name__}(" \
+               f"[{','.join(result)}], " \
+               f"{self.numbers}" \
+               f")"
+
+    def _adding(self, *t):
+        for per in t:
+            self._add(per.name, per.surname, per.patronymic, per.mail, per.phone, per.address)
+
+    def _add(self, name, surname, patronymic, mail, phone, address):
+        self.catalog.append(Person(name, surname, patronymic, mail, phone, address))
+
+    def _search(self, name, surname, patronymic, mail, phone, address):
+        for i, per in enumerate(self.catalog):
+            if (per.name, per.surname) \
+                    == (name, surname):
+                return per 
+        else:
+            raise ValueError('Контакт не найден')
 
 
-def write(x):
-    import pickle
-    t = x.pop(-1)
-    v = t
-    print(t)
-    print(v)
-    f = open('t.txt', 'ab')
-    pickle.dump(v, f)
-    f.close()
-
-
-def newfile():
-    from os import rename
-    f = open('newfile.txt', 'w')
-    f.close()
-
-
-def _open():
-    import pickle
-    f = open('t.txt', 'rb')
-    a = pickle.load(f)
-    print(a)
-    f.close()
-
-try:
-    f = open('t.txt', 'ar')
-except:
-    f = open('t.txt', 'w')
-
-try:
-    h = open('b.txt', 'ar')
-except :
-    h = open('b.txt', 'w')
-
-o = []
-v = {}
-j = []
-while True :
-    try :
-        a = int(input("""
-              Главное меню
-    создать новый контакт нажмите: 1
-    посмотреть список контактов нажмите: 2
-    записать данные в файл нажмите 3
-    посмотреть список контактов нажмите: 4
-    закончить работу программы нажмите: 5
-    """))
+l = List([])
+print(l)
+while True:
+    try:
+        k = int(input("""
+                  Главное меню
+          создать новый контакт нажмите: 1
+        посмотреть список контактов нажмите: 2
+          записать данные в файл нажмите: 3
+               для поиска нажмите: 4
+         закончить работу программы нажмите: 5
+        """))
     except :
         continue
-    if a == 1 :
-        g = {}
-        f = open('t.txt', 'a')
-        Pn = Person
-        Pn.n += 1
-        Pn.name = input('Введите имя: ')
-        Pn.surname = input('Введите фамилию: ')
-        b = input("хотите ввести еще данные (1 - да, 0 - нет)")
-        if b == "1" :
-            mails = []
-            phones = []
-            Pn.patronymic = input('Введите отчество: ')
-            Pn.mail = input('Введите основную почту: ')
-            if not Pn.mail:
-                pass
-            else:
-             mails.append(Pn.mail)
-             while True :
-                c = input("that's all ? (1 - yes, ENTER - continue)")
-                if c == "1" :
-                    break
-                else :
-                    Pn.mail = input('Введите дополнительную почту: ')
-                    mails.append(Pn.mail)
-                    continue
-
-            Pn.phone = input('Введите основной номер телефона: ')
-            if not Pn.phone:
-                pass
-            else:
-             phones.append(Pn.phone)
-             while True :
-                c = input("that's all ? (1 - yes, ENTER - continue)")
-                if c == "1" :
-                    break
-                else :
-                    Pn.phone = input('Введите дополнительный номер телефона: ')
-                    phones.append(Pn.phone)
-                    continue
-            print(phones)
-            print(mails)
-            Pn.address = input('Введите адрес: ')
-        else :
-            pass
-        if b == "1" :
-            g = dict(
-                {'Name' : Pn.name, 'Surname' : Pn.surname, 'Patronymic' : Pn.patronymic, 'Mail' : mails,
-                 'Phone' : phones, 'Address' : Pn.address})
-        else :
-            g = dict({'Name' : Pn.name, 'Surname' : Pn.surname})
-        j.append(g)
-        if b == "1" :
-            l = f'Person {Pn.n}\nName: <<{Pn.name}>> Surname: <<{Pn.surname}>> ' \
-                f'Patronymic: <<{Pn.patronymic}>> Mail: <<{Pn.mail}>>, Phone: <<{Pn.phone}>> \n '
-        else :
-            l = f'Person {Person.n}\nName: <<{Person.name}>> Surname: <<{Person.surname}>> '
-        o.append(g)
-        print(o)
-        print(g)
-        print(j)
-        phones = []
-        mails = []
-
-    elif a == 2 :
-        h = open('b.txt', 'r')
-        for i in h :
-            print(i)
-        h.close()
-    elif a == 3 :
-        write(j)
-    elif a == 4:
-        _open()
-        del a
-    elif a == 5 :
-        c = input('Сохранить данные? (1 - да 0 - нет)')
-        if c == '1' :
-            _save(o)
-        else :
-            pass
+    if k == 1 :
+     name = input("print name")
+     surname = input("print surname")
+     patronymic = input("print patronymic")
+     mail = input("print mail")
+     phone = input("print phone")
+     address = input("print address")
+     pers = (Person(name, surname, patronymic, mail, phone, address),)
+     l._adding(*pers)
+    elif k == 2:
+       print(l)
+    elif k == 3:
+        pass
+    elif k == 4:
+        par1 = input()
+        par2 = input()
+        per = l._search(par1, par2)
+    elif k == 5:
         break
-f.close()
-h.close()

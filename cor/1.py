@@ -14,14 +14,13 @@ class Person:
 
 class List:
 
-    def __init__(self, catalog, numbers=0):
+    def __init__(self, catalog):
         self.catalog = catalog
-        self.numbers = numbers
+
 
     def __str__(self):
-        result = [f"Количество контактов = {self.numbers}"]
-        for i, pers in enumerate(self.catalog, start=1) :
-         self.numbers += 1
+        result = ['']
+        for i, pers in enumerate(self.catalog, start=1):
          result.append(f"{i}. {str(pers)}")
         return '\n'.join(result)
 
@@ -69,9 +68,9 @@ while True:
        print(l)
     elif k == 3:
         try:
-            f = open ('list.txt', 'ab')
+            f = open('list.txt', 'a', encoding='utf-8')
         except:
-            f = open ('list.txt', 'wb')
+            f = open('list.txt', 'w', encoding='utf-8')
         if l == "\n":
             pass
         else:
@@ -80,17 +79,47 @@ while True:
     elif k == 4:
         par1 = input()
         par2 = input()
-        per = l._search(par1, par2)
+        try:
+         per = l._search(par1, par2)
+        except:
+                m = input('Контакт не найден, хотите выполнить поиск в файле \"list.txt\"(1 - да, 0 - нет)')
+                if m == '1':
+                    c = open('list.txt', 'r', encoding='utf-8')
+                    f = []
+                    for i in c.readlines():
+                        if i == '\n':
+                            print('\n')
+                        else:
+                            print(i)
+                            f.append(i)
+
+
+
+
+                    for i in c.readlines():
+                        if i == '\n':
+                            f.append('\n')
+                        else:
+                            f.append(i)
+                            print(f)
+                    print(f)
+                    f = l
+                    f._search(par1, par2)
+                    if ValueError:
+                        print('Контакт не найден!')
+                else:
+                    continue
         print(f'Контакт найден: имя {per.name}, фамилия {per.surname}, отчество {per.patronymic}, '
               f'почта {per.mail}, '
               f'мобильный телефон {per.phone}, {per.address}')
+
+
     elif k == 5:
         try:
-            f = open('list.txt', 'rb')
+            f = open('list.txt', 'r', encoding='utf-8')
         except:
             print("файл не найден!")
-        g = []
-        g = f.readlines()
-        print(g)
+        for i in f.readlines():
+            print(i)
     elif k == 6:
         break

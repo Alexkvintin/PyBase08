@@ -19,7 +19,7 @@ class List:
 
 
     def __str__(self):
-        result = ['']
+        result = []
         for i, pers in enumerate(self.catalog, start=1):
          result.append(f"{i}. {str(pers)}")
         return '\n'.join(result)
@@ -31,16 +31,45 @@ class List:
     def _add(self, name, surname, patronymic, mail, phone, address):
         self.catalog.append(Person(name, surname, patronymic, mail, phone, address))
 
-    def _search(self, name, surname):
+    def _1search(self, name):
         for i, per in enumerate(self.catalog):
-            if (per.name, per.surname) \
-                    == (name, surname):
+            if (per.name) \
+                    == (name):
                 return per
         else:
             raise ValueError('Контакт не найден')
 
+    def _2search(self, surname):
+        for i, per in enumerate(self.catalog):
+            if (per.surname) \
+                    == (surname):
+                return per
+        else:
+            raise ValueError('Контакт не найден')
 
-l = List([])
+    def _3search(self, name, surname, patronymic):
+            for i, per in enumerate(self.catalog):
+                if (per.name, per.surname, per.patronymic) \
+                        == (name, surname, patronymic):
+                    return per
+            else:
+                raise ValueError('Контакт не найден')
+
+    def _4search(self, name, surname, patronymic, mail, phone, address):
+                for i, per in enumerate(self.catalog):
+                    if (per.name, per.surname, per.patronymic, per.mail, per.phone, per.address) \
+                            == (name, surname, patronymic, mail, phone, address,):
+                        return per
+                else:
+                    raise ValueError('Контакт не найден')
+
+
+try:
+    f = open('list.txt', 'r', encoding='utf-8')
+    x = f.readlines()
+    l = List(x)
+except:
+    l = List([])
 print(l)
 while True:
     try:
@@ -76,50 +105,67 @@ while True:
         else:
             h = str(l)
         f.write(h)
+        f.close()
     elif k == 4:
-        par1 = input()
-        par2 = input()
         try:
-         per = l._search(par1, par2)
+            j = int(input("""по каким парамерам будт осуществлятся поиск ?
+            (1 - имя, 2 - фамилия, 3 - имя, фамилия, отчество, 4 - по всем реквизитам """))
         except:
-                m = input('Контакт не найден, хотите выполнить поиск в файле \"list.txt\"(1 - да, 0 - нет)')
-                if m == '1':
-                    c = open('list.txt', 'r', encoding='utf-8')
-                    f = []
-                    for i in c.readlines():
-                        if i == '\n':
-                            print('\n')
-                        else:
-                            print(i)
-                            f.append(i)
-
-
-
-
-                    for i in c.readlines():
-                        if i == '\n':
-                            f.append('\n')
-                        else:
-                            f.append(i)
-                            print(f)
-                    print(f)
-                    f = l
-                    f._search(par1, par2)
-                    if ValueError:
-                        print('Контакт не найден!')
-                else:
-                    continue
-        print(f'Контакт найден: имя {per.name}, фамилия {per.surname}, отчество {per.patronymic}, '
-              f'почта {per.mail}, '
-              f'мобильный телефон {per.phone}, {per.address}')
-
-
+            continue
+        if j == 1:
+            par1 = input()
+            per = l._1search(par1)
+            print(f'Контакт найден: имя {per.name}, фамилия {per.surname}, отчество {per.patronymic}, '
+                  f'почта {per.mail}, '
+                  f'мобильный телефон {per.phone}, {per.address}')
+        elif j == 2:
+            par1 = input()
+            per = l._2search(par1)
+            print(f'Контакт найден: имя {per.name}, фамилия {per.surname}, отчество {per.patronymic}, '
+                  f'почта {per.mail}, '
+                  f'мобильный телефон {per.phone}, {per.address}')
+        elif j == 3:
+            par1 = input()
+            par2 = input()
+            par3 = input()
+            per = l._3search(par1, par2, par3)
+            print(f'Контакт найден: имя {per.name}, фамилия {per.surname}, отчество {per.patronymic}, '
+                  f'почта {per.mail}, '
+                  f'мобильный телефон {per.phone}, {per.address}')
+        elif j == 4:
+            par1 = input()
+            par2 = input()
+            par3 = input()
+            par4 = input()
+            par5 = input()
+            par6 = input()
+            per = l._4search(par1, par2, par3, par4, par5, par6)
+            print(f'Контакт найден: имя {per.name}, фамилия {per.surname}, отчество {per.patronymic}, '
+                  f'почта {per.mail}, '
+                  f'мобильный телефон {per.phone}, адрес {per.address}')
     elif k == 5:
+        print('-'*110)
         try:
             f = open('list.txt', 'r', encoding='utf-8')
         except:
             print("файл не найден!")
         for i in f.readlines():
             print(i)
+        print('-'*110)
+        f.close()
     elif k == 6:
-        break
+        n = input("сохранить данные в файле \'list.txt\' (1 - да, 0 - нет)")
+        if n == "1":
+            try:
+                f = open('list.txt', 'a', encoding='utf-8')
+            except:
+                f = open('list.txt', 'w', encoding='utf-8')
+            if l == "\n":
+                pass
+            else:
+                h = str(l)
+            f.write(h)
+            f.close()
+            break
+        else:
+          break

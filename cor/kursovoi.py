@@ -43,7 +43,7 @@ class List :
                 else :
                     print('Контакт не найден')
             if x == 3 :
-                if per.name == par or per.surname == par :
+                if per.name == par or per.surname == par or per.patronymic == par:
                     return per
                 else :
                     print('Контакт не найден')
@@ -127,8 +127,8 @@ while True :
         f.close()
     elif k == 4 :
         try :
-            j = int(input("""по каким парамерам будт осуществлятся поиск ?
-            (1 - имя, 2 - фамилия, 3 - имя, фамилия, отчество, 4 - по всем реквизитам """))
+            j = int(input("""                            по каким парамерам будт осуществлятся поиск ?
+            1 - имя, 2 - фамилия, 3 - имя, фамилия, отчество, 4 - по всем реквизитам """))
         except :
             continue
         par1 = input()

@@ -88,9 +88,40 @@ while True:
      name = input("print name")
      surname = input("print surname")
      patronymic = input("print patronymic")
-     mail = input("print mail")
-     phone = input("print phone")
-     address = input("print address")
+     mal = []
+     m = input("print mail")
+     mal.append(m)
+     mi = input("хотите ввести доплнительную почту? (1 - да, 0 - нет) ")
+     if mi == "1":
+         while True:
+             m = input("print mail")
+             mal.append(m)
+             mi = input("хотите ввести доплнительную почту? (1 - да, 0 - нет) ")
+             if mi == "1":
+                 continue
+             else:
+                 break
+     mail = '; '.join(mal)
+     print(mail)
+     ph = []
+     p = input("print phone")
+     ph.append(p)
+     pi = input("хотите ввести доплнительный номер телефона? (1 - да, 0 - нет) ")
+     if pi == "1" :
+         while True :
+             p = input("print phone")
+             ph.append(p)
+             pi = input("хотите ввести доплнительный номер телефона? (1 - да, 0 - нет) ")
+             if pi == "1" :
+                 continue
+             else :
+                 break
+     phone = '; '.join(ph)
+     u = input("хотите ввести адрес ? (1 - да, 0 - нет) ")
+     if u == "1":
+         address = input("print address")
+     else:
+         address = ''
      pers = (Person(name, surname, patronymic, mail, phone, address),)
      l._adding(*pers)
     elif k == 2:

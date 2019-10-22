@@ -32,7 +32,7 @@ def text_stat(t):
             d[i.lower()] = g.count(i)
     for i in d:
      print(i, d[i])
-    for i in text:
+    for i in t:
         l += 1
         b += len(i)
         counter = True
@@ -47,7 +47,7 @@ def text_stat(t):
     print("Количестро слов в тексте: ", w)
     print("количество символов в тексте: ", b)
     t.sort()
-    t = str(text)
+    t = str(t)
     print("Статистика символов:")
     for i in t:
         if i == '@' or i == '.' or i == ';' or i == ']' or i == '[' or i == ' ' or i == '(' or i == ')' or i == '\'' \
